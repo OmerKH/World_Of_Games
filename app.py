@@ -1,8 +1,8 @@
 #                                                 World of Games project                                              #
-from guess_game import play as start_guess_game
-from memory_game import play as start_memory_game
-from currency_roulette_game import play as start_currency_roulette_game
-from score import add_score
+from games.guess_game import play as start_guess_game
+from games.memory_game import play as start_memory_game
+from games.currency_roulette_game import play as start_currency_roulette_game
+from scores.score import add_score
 
 
 def welcome():
@@ -70,7 +70,7 @@ def start_play():
             else:
                 try:
                     score = int(
-                        open("Scores.txt", "r", encoding="utf-8").read().strip())
+                        open("scores/Scores.txt", "r", encoding="utf-8").read().strip())
                     print(f"Sorry, you lost your score is {score}")
                 except FileNotFoundError:
                     print("Sorry, you lost. You don't have a score yet.")
@@ -86,7 +86,7 @@ def start_play():
             "Do you want to choose another game? (yes/no): ").strip().lower()
         if another_game not in ["yes", "y"]:
             print("Thank you for playing! Goodbye!")
-            with open("Scores.txt", "w", encoding="utf-8") as file:
+            with open("scores/Scores.txt", "w", encoding="utf-8") as file:
                 file.write("0")
             break
 
