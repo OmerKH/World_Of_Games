@@ -1,4 +1,5 @@
 from random import randrange
+from utils import validate_input, compare_values
 
 
 # generate_number():
@@ -12,27 +13,14 @@ def generate_number(difficulty):
     secret_number = randrange(difficulty)
     return secret_number
 
-###
-# get_guess_from_user :
-# input - int()  <-- validation!!
-#
-
 
 def get_guess_from_user(difficulty):
-    while True:
-        try:
-            guess_num = int(
-                input("input a number between 0 to the difficulty level: "))
-            if 0 <= guess_num <= difficulty:
-                return guess_num
-            else:
-                print("Invalid input, Please try a number between 0 to 10")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
+    prompt = "Input a number between 0 to the difficulty level: "
+    return validate_input(prompt, int, 0, difficulty)
 
 
 def compare_results(secret_number, user_guess):
-    return secret_number == user_guess
+    return compare_values(secret_number, user_guess, "exact")
 
 
 def play(difficulty):

@@ -1,6 +1,8 @@
 import time
 from random import randrange
 import os
+from utils import validate_input, compare_values
+
 
 # the function needs to generate sequence of random numbers depending on the difficulty level (generate_sequence)
 # display it for 0.7 sec
@@ -33,22 +35,15 @@ def display_sequence(sequence, delay):
 
 def get_list_from_user(difficulty):
     guess_list = []
-    for numb in range(difficulty):
-        while True:
-            try:
-                guess_num = int(input("Enter what you're remembering: "))
-                if 1 <= guess_num <= 100:
-                    guess_list.append(guess_num)
-                    break
-                else:
-                    print("Choose a number between 1 and 100")
-            except ValueError:
-                print("Invalid input")
+    for _ in range(difficulty):
+        prompt = "Enter what you're remembering: "
+        guess_num = validate_input(prompt, int, 1, 100)
+        guess_list.append(guess_num)
     return guess_list
 
 
 def is_list_equal(gen_list, user_list):
-    return gen_list == user_list
+    return compare_values(gen_list, user_list, "list")
 
 
 def play(difficulty):
@@ -64,5 +59,3 @@ def play(difficulty):
         return True
     else:
         return False
-
-

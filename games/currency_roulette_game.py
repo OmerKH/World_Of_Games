@@ -1,5 +1,7 @@
 import requests
 from random import randrange
+from utils import validate_input, compare_values
+
 
 # the function needs to give a random number (generate_number)
 # display it
@@ -33,23 +35,14 @@ def get_money_interval(sec_num):
 
 
 def get_guess_from_user(number):
-    while True:
-        try:
-            guess_num = float(
-                input(f"Enter you're guess, how much is {number} in ILS: "))
-            if not isinstance(guess_num, float) or guess_num <= 0:
-                print("Invalid input, Please try a positive number")
-            else:
-                return guess_num
-        except ValueError:
-            print("Invalid input")
+    prompt = f"Enter your guess, how much is {number} in ILS: "
+    return validate_input(prompt, float, min_value=0.01)
 
 
 def compare_results(secret_number, user_guess, difficulty):
-    spectrum = 10 - difficulty
-    max_range = secret_number + spectrum
-    min_range = secret_number - spectrum
-    return min_range <= user_guess <= max_range <= max_range
+    tolerance = 10 - difficulty
+    return compare_values(secret_number, user_guess, "range", tolerance)
+
 
 # print(compare_results(10, 1))
 
@@ -68,4 +61,3 @@ def play(difficulty):
         return True
     else:
         return f"You guessed {y_n} and it's not closed enough to {converted}"
-
