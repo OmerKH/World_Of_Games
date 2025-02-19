@@ -9,14 +9,7 @@ def screen_cleaner():
 
 
 def validate_input(prompt, input_type, min_value=None, max_value=None):
-    """
-    Generalized input validation function
-    Args:
-        prompt: Message to display to user
-        input_type: Type of input expected (int, float)
-        min_value: Minimum allowed value
-        max_value: Maximum allowed value
-    """
+
     while True:
         try:
             user_input = input_type(input(prompt))
@@ -29,14 +22,7 @@ def validate_input(prompt, input_type, min_value=None, max_value=None):
 
 
 def compare_values(value1, value2, comparison_type="exact", tolerance=0):
-    """
-    Generalized comparison function
-    Args:
-        value1: First value to compare
-        value2: Second value to compare
-        comparison_type: Type of comparison ("exact", "range", "list")
-        tolerance: Allowed difference for range comparisons
-    """
+
     if comparison_type == "exact":
         return value1 == value2
     elif comparison_type == "range":
