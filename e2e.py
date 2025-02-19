@@ -12,21 +12,25 @@ def test_scores_service(app_url):
     driver = webdriver.Chrome()
     driver.get(app_url)
 
-    try:
-        score_element = driver.find_element(By.ID, "score")
-        score_text = score_element.text.strip()
-
-        if not score_text.isdigit():
-            return False
-
-        score = int(score_text)
-        return 1 <= score <= 1000
-    except Exception as e:
-        print(f"Error during testing: {e}")
-        return False
-    finally:
-        return True
+    score_elements = driver.find_elements(By.ID, "score")
+    if not score_elements:
         driver.quit()
+        return False
+
+    score_element = score_elements[0]
+    score_text = score_element.text.strip()
+
+    if not score_text.isdigit():
+        driver.quit()
+        return False
+
+    score = int(score_text)
+    if not (1 <= score <= 1000):
+        driver.quit()
+        return False
+
+    driver.quit()
+    return True
 
 
 def main_function():
