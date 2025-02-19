@@ -1,5 +1,5 @@
 from flask import Flask
-from utils import BAD_RETURN_CODE
+from utils import BAD_RETURN_CODE, SCORES_FILE_NAME
 
 
 # display in HTML
@@ -11,7 +11,8 @@ app = Flask(__name__)
 def score_server():
     score = "0"
     try:
-        with open("Scores.txt", "r", encoding="utf-8") as file:
+        with open(SCORES_FILE_NAME, "r", encoding="utf-8") as file:
+
             score = file.read().strip()
             if not score.isdigit():
                 return f"""
