@@ -2,8 +2,6 @@ from flask import Flask
 from utils import BAD_RETURN_CODE, SCORES_FILE_NAME
 
 
-# display in HTML
-
 app = Flask(__name__)
 
 
@@ -50,3 +48,7 @@ def score_server():
             </body>
         </html>
         """
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
