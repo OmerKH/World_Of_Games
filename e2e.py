@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import sys
 
 # Test the web service by checking if the score is a number between 1 and 1000
 # :param app_url: URL of the web service
@@ -50,4 +51,4 @@ def main_function():
 
 
 if __name__ == "__main__":
-    main_function()
+    sys.exit(main_function())

@@ -5,6 +5,7 @@ WORKDIR /app
 
 RUN pip install Flask
 
+# Copy application files
 COPY main_score.py .
 COPY utils.py .
 COPY Scores.txt .
@@ -16,6 +17,18 @@ EXPOSE 5000
 CMD ["python", "main_score.py"]
 
 
+
 #Build - docker build -t flaskapp .
 
 #Run -docker run -p 5000:5000 wog_flask
+
+####################################################################
+# using utils?
+####################################################################
+
+
+# Copy requirements first to leverage Docker cache
+# COPY requirements.txt .
+
+# Install all dependencies
+# RUN pip install --no-cache-dir -r requirements.txt

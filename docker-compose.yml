@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  flask_app:
+    container_name: wog_flask
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
