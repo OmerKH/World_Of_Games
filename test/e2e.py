@@ -17,7 +17,10 @@ def test_scores_service(app_url):
         options.add_argument('--disable-dev-shm-usage')
 
         # Initialize Chrome driver
+        print("Attempting to initialize ChromeDriver...")
         driver = webdriver.Chrome(options=options)
+        print("ChromeDriver initialized successfully.")
+
         driver.get(app_url)
 
         # Read the score from Scores.txt
@@ -32,6 +35,8 @@ def test_scores_service(app_url):
 
     except Exception as e:
         print(f"Error during test: {str(e)}")
+        print("ChromeDriver may not be installed correctly or is not executable.")
+
         return False
     finally:
         if driver is not None:
