@@ -7,7 +7,12 @@ pipeline {
                 git 'https://github.com/OmerKH/World_of_Games.git'
             }
         }
-        stage('Build') {
+    stage('Verify Git') {
+        steps {
+            bat 'git status'
+        }
+    }
+    stage('Build') {
             steps {
                 // Build the Docker image
                 bat 'docker build -t flaskapp .'
