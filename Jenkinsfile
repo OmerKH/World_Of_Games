@@ -9,12 +9,14 @@ pipeline {
         }
         stage('Build') {
             steps {
+                // Build the Docker image
                 bat 'docker build -t flaskapp .'
             }
         }
         stage('Run') {
             steps {
-                bat 'docker run -d -p 8777:5000 -v %cd%/Scores.txt:/app/Scores.txt --name wog_flask flaskapp'
+                // Run the Dockerized application
+                bat 'docker run -d -p 8777:5000 -v $(pwd)/Scores.txt:/app/Scores.txt --name wog_flask flaskapp'
             }
         }
         stage('Test') {
@@ -24,9 +26,10 @@ pipeline {
         }
         stage('Finalize') {
             steps {
+                // Terminate the tested container
                 bat 'docker stop wog_flask'
                 bat 'docker rm wog_flask'
-                // Push to DockerHub
+                // Push the new image to DockerHub
                 bat 'docker tag flaskapp omerkh/flaskapp:latest'
                 bat 'docker push omerkh/flaskapp:latest'
             }
