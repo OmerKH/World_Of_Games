@@ -41,8 +41,7 @@ def main_function():
     Main function to run the test and return appropriate exit code
     :return: 0 if test passes, -1 if test fails
     """
-    #    app_url = "http://localhost:5000"
-    app_url = "http://host.docker.internal:5000"  # Updated URL for Docker
+    app_url = "http://localhost:5000"
 
     if test_scores_service(app_url):
         print("Test passed!")
