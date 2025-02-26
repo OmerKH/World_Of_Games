@@ -8,6 +8,7 @@ import sys
 
 
 def test_scores_service(app_url):
+    driver = None  # Initialize driver variable
     try:
         # Set up Chrome options
         options = webdriver.ChromeOptions()
@@ -33,7 +34,8 @@ def test_scores_service(app_url):
         print(f"Error during test: {str(e)}")
         return False
     finally:
-        driver.quit()
+        if driver is not None:
+            driver.quit()
 
 
 def main_function():
