@@ -1,0 +1,7 @@
+# Docker commands to build and run the Flask application
+
+# Build the Docker image using Dockerfile
+docker build -t flaskapp .
+
+# Run the Docker container using Docker Compose
+docker-compose up
