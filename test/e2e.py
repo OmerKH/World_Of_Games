@@ -8,7 +8,6 @@ import sys
 
 
 def test_scores_service(app_url):
-    driver = None
     try:
         # Set up Chrome options
         options = webdriver.ChromeOptions()
@@ -20,9 +19,9 @@ def test_scores_service(app_url):
         driver = webdriver.Chrome(options=options)
         driver.get(app_url)
 
-        # Find the score element
-        score_element = driver.find_element(By.ID, 'score')
-        score_text = score_element.text
+        # Read the score from Scores.txt
+        with open("Scores.txt", "r", encoding="utf-8") as file:
+            score_text = file.read().strip()
 
         # Validate the score
         if score_text.isdigit():
@@ -34,8 +33,7 @@ def test_scores_service(app_url):
         print(f"Error during test: {str(e)}")
         return False
     finally:
-        if driver is not None:
-            driver.quit()
+        driver.quit()
 
 
 def main_function():
@@ -44,7 +42,6 @@ def main_function():
     :return: 0 if test passes, -1 if test fails
     """
     app_url = "http://localhost:5000"
-
     if test_scores_service(app_url):
         print("Test passed!")
         return 0

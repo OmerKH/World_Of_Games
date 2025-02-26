@@ -19,8 +19,10 @@
         }
         stage('Test') {
             steps {
-                bat 'pip install selenium' // Add this line to install selenium
-                bat 'docker run --rm flaskapp python e2e.py'
+                // Remove the line to install selenium outside the Docker container
+
+                bat 'docker run --rm -v %cd%/Scores.txt:/app/Scores.txt flaskapp python e2e.py'
+
 
 
 
