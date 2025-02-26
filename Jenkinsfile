@@ -20,8 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 bat 'pip install selenium' // Add this line to install selenium
-                bat 'docker run --rm flaskapp python test/e2e.py'
-
+                bat 'python test/e2e.py'
 
             }
         }
