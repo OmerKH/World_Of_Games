@@ -9,12 +9,10 @@ WORKDIR /app
 COPY main_score.py .
 COPY utils.py .
 COPY Scores.txt .
-COPY test/e2e.py ./src/
 COPY requirements.txt .
+COPY test/e2e.py .
 
 RUN pip install --no-cache-dir -r requirements.txt
-
-
 
 
 # Expose the port the app runs on
