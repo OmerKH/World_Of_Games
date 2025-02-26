@@ -15,6 +15,10 @@ pipeline {
         }
         stage('Run') {
             steps {
+                // Stop and remove the existing container if it exists
+                bat 'docker stop wog_flask || echo "No existing container to stop."'
+                bat 'docker rm wog_flask || echo "No existing container to remove."'
+                
                 // Run the Dockerized application
                 bat 'docker run -d -p 8777:5000 -v $(pwd)/Scores.txt:/app/Scores.txt --name wog_flask flaskapp'
             }
