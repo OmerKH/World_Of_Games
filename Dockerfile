@@ -1,5 +1,6 @@
 # Use an appropriate base image
-FROM python:3.8-slim
+FROM python:3.9-slim
+
 # Working directory
 WORKDIR /app
 
