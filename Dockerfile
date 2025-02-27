@@ -16,10 +16,14 @@ COPY test/e2e.py .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Google Chrome
-RUN apk add --no-cache \
-    chromium \
-    chromium-chromedriver \
-    && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update && apt-get install -y google-chrome-stable \
+    && apt-get clean
+
 
 
 # Expose the port the app runs on and set the display port for Chrome
