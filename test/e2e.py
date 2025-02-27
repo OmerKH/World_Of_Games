@@ -1,5 +1,5 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 import sys
 
 # Test the web service by checking if the score is a number between 1 and 1000
@@ -12,7 +12,7 @@ def test_scores_service(app_url):
     try:
         # Set up Chrome options
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')  # Run in headless mode
+        options.add_argument('--headless')  # Run in headless mode
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
@@ -36,7 +36,6 @@ def test_scores_service(app_url):
     except Exception as e:
         print(f"Error during test: {str(e)}")
         print("ChromeDriver may not be installed correctly or is not executable.")
-
         return False
     finally:
         if driver is not None:
