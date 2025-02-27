@@ -4,26 +4,6 @@ FROM python:3.9-slim
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
-    libnss3 \
-    libgconf-2-4 \
-    libxi6 \
-    libxrender1 \
-    libxrandr2 \
-    libxss1 \
-    libasound2 \
-    fonts-liberation \
-    libatk-bridge2.0-0 \
-    libatk1.0-0 \
-    libatspi2.0-0 \
-    libcairo2 \
-    libcups2 \
-    libcurl4 \
-    libgtk-3-0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxkbcommon0 \
-    xdg-utils \
     && wget -q -O /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i /tmp/google-chrome.deb; apt-get -y -f install \
     && rm /tmp/google-chrome.deb
