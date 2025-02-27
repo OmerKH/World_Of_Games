@@ -1,5 +1,27 @@
 FROM python:3.9-slim
 
+# Install necessary packages for Chrome and ChromeDriver
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+    libnss3 \
+    libgconf-2-4 \
+    libxi6 \
+    libxrender1 \
+    libxrandr2 \
+    libxss1 \
+    libasound2 \
+    && wget -q -O /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && dpkg -i /tmp/google-chrome.deb; apt-get -y -f install \
+    && rm /tmp/google-chrome.deb
+
+# Install ChromeDriver
+RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+') && \
+    wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROME_VERSION}/chromedriver_linux64.zip && \
+    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
+    chmod +x /usr/local/bin/chromedriver && \
+    rm /tmp/chromedriver.zip
+
 # Working directory
 WORKDIR /app
 
