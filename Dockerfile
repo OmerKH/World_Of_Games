@@ -1,5 +1,4 @@
-FROM python:3.9-alpine3.21
-
+FROM python:3.9-slim
 
 # Working directory
 WORKDIR /app
@@ -11,11 +10,11 @@ COPY Scores.txt .
 COPY requirements.txt .
 COPY test/e2e.py .
 
-
 # Ensure selenium is included in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Google Chrome
+
+# Install necessary packages for Chrome
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg2 \
@@ -24,11 +23,16 @@ RUN apt-get update && apt-get install -y \
     && apt-get update && apt-get install -y google-chrome-stable \
     && apt-get clean
 
-
-
-# Expose the port the app runs on and set the display port for Chrome
-
+# Expose the port the app runs on
 EXPOSE 5000
 
 # Set the command to run the Flask application
-CMD ["python3", "main_score.py"]
+
+# Set the command to run the Flask application
+CMD ["python", "main_score.py"]
+
+
+
+#Build - docker build -t flaskapp .
+
+#Run - docker run -p 5000:5000 wog_flask
