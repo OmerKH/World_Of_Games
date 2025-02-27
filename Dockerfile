@@ -1,21 +1,26 @@
-# Use an appropriate base image
+# Use the official Python image.
 FROM python:3.9-slim
 
-# Working directory
+# Set the working directory in the container.
 WORKDIR /app
 
-# Copy application files
-COPY main_score.py .
-COPY utils.py .
-COPY Scores.txt .
+# Copy the requirements file into the container.
 COPY requirements.txt .
-COPY test/e2e.py .
 
-# Ensure selenium is included in requirements.txt
+# Install the dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the app runs on
-EXPOSE 5000
+# Install necessary packages for Chrome
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update && apt-get install -y google-chrome-stable \
+    && apt-get clean
 
-# Set the command to run the Flask application
-CMD ["python", "main_score.py"]
+# Copy the rest of the application code into the container.
+COPY . .
+
+# Command to run the application.
+CMD ["python", "main.py"]
