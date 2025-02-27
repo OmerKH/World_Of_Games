@@ -1,8 +1,6 @@
-from selenium import webdriver
 import chromedriver_autoinstaller
-from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import sys
 
 
@@ -15,7 +13,8 @@ def test_scores_service(app_url):
     driver = None  # Initialize driver variable
     try:
         # Set up Chrome options
-        options = Options()
+        options = webdriver.ChromeOptions()
+        chromedriver_autoinstaller.install()  # Install ChromeDriver if not found
         options.add_argument('--headless')  # Run in headless mode
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
