@@ -1,20 +1,29 @@
-FROM python:3.9-slim
+# Use an appropriate base image
+FROM python:3.8-slim
 
-# Working directory
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    libgconf-2-4 \
+    lsb-release \
+    wget \
+    unzip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
+
+# Set the working directory
 WORKDIR /app
 
-# Copy application files
-COPY main_score.py .
-COPY utils.py .
-COPY Scores.txt .
+# Copy the requirements file and install dependencies
 COPY requirements.txt .
-COPY test/e2e.py .
-
-# Ensure selenium is included in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the app runs on
-EXPOSE 5000
+# Copy the rest of the application code
+COPY . .
 
-# Set the command to run the Flask application
-CMD ["python", "main_score.py"]
+# Command to run the application
+CMD ["python", "test/e2e.py"]
