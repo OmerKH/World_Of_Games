@@ -16,9 +16,10 @@ def test_scores_service(app_url):
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
-        # Initialize Chrome driver
+        # Initialize Chrome driver using ChromeDriverManager
         print("Attempting to initialize ChromeDriver...")
-        driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome(
+            ChromeDriverManager().install(), options=options)
         print("ChromeDriver initialized successfully.")
 
         driver.get(app_url)
