@@ -32,7 +32,8 @@ EXPOSE 5000
 # Set the command to run the Flask application
 
 # Set the command to run the Flask application
-CMD ["venv/bin/python", "main_score.py"]
+CMD ["./venv/bin/python", "main_score.py"]
+
 
 
 
