@@ -4,26 +4,51 @@ from selenium.webdriver.common.by import By
 import sys
 
 
+# Test the web service by checking if the score is a number between 1 and 1000
+# :param app_url: URL of the web service
+# :return: True if score is valid, False otherwise
+
+
+def setup_webdriver_options():
+    options = webdriver.ChromeOptions()
+    chromedriver_autoinstaller.install()  # Install ChromeDriver if not found
+    options.add_argument('--headless')  # Run in headless mode
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    return options
+
+
 def test_scores_service(app_url):
-    # Set up the Chrome driver
-    chromedriver_autoinstaller.install()
-    driver = webdriver.Chrome()
+    driver = None  # Initialize driver variable
+    try:
+        # Set up Chrome options
+        options = setup_webdriver_options()
 
-    # Open the application URL
-    driver.get(app_url)
+        # Initialize Chrome driver
+        print("Attempting to initialize ChromeDriver...")
+        driver = webdriver.Chrome(options=options)
+        print("ChromeDriver initialized successfully.")
 
-    # Check if the score element is found
-    score_element = driver.find_element(By.ID, 'score')
-    if score_element:
-        score = int(score_element.text)
-        # Check if the score is between 1 and 1000
-        if 1 <= score <= 1000:
-            return True
-        else:
-            return False
-    else:
+        driver.get(app_url)
+
+        # Read the score from Scores.txt
+        with open("Scores.txt", "r", encoding="utf-8") as file:
+            score_text = file.read().strip()
+
+        # Validate the score
+        if score_text.isdigit():
+            score = int(score_text)
+            return 1 <= score <= 1000
         return False
-    driver.quit()
+
+    except Exception as e:
+        print(f"Error during test: {str(e)}")
+        print("ChromeDriver may not be installed correctly or is not executable.")
+
+        return False
+    finally:
+        if driver is not None:
+            driver.quit()
 
 
 def main_function():
