@@ -4,7 +4,9 @@ FROM python:3.9-alpine3.21
 RUN apk add --no-cache \
     chromium \
     chromium-chromedriver \
-    && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
+    && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome \
+    && ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver
+
 
 
 # Working directory
