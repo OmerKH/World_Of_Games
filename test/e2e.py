@@ -9,15 +9,20 @@ import sys
 # :return: True if score is valid, False otherwise
 
 
+def setup_webdriver_options():
+    options = webdriver.ChromeOptions()
+    chromedriver_autoinstaller.install()  # Install ChromeDriver if not found
+    options.add_argument('--headless')  # Run in headless mode
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    return options
+
+
 def test_scores_service(app_url):
     driver = None  # Initialize driver variable
     try:
         # Set up Chrome options
-        options = webdriver.ChromeOptions()
-        chromedriver_autoinstaller.install()  # Install ChromeDriver if not found
-        options.add_argument('--headless')  # Run in headless mode
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
+        options = setup_webdriver_options()
 
         # Initialize Chrome driver
         print("Attempting to initialize ChromeDriver...")
