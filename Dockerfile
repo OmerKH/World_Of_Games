@@ -1,14 +1,18 @@
-# Use the official Python image.
 FROM python:3.9-slim
 
-# Set the working directory in the container.
+# Working directory
 WORKDIR /app
 
-# Copy the requirements file into the container.
+# Copy application files
+COPY main_score.py .
+COPY utils.py .
+COPY Scores.txt .
 COPY requirements.txt .
+COPY test/e2e.py .
 
-# Install the dependencies.
+# Ensure selenium is included in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Install necessary packages for Chrome
 RUN apt-get update && apt-get install -y \
@@ -19,8 +23,27 @@ RUN apt-get update && apt-get install -y \
     && apt-get update && apt-get install -y google-chrome-stable \
     && apt-get clean
 
-# Copy the rest of the application code into the container.
-COPY . .
+# Expose the port the app runs on
+EXPOSE 5000
 
-# Command to run the application.
-CMD ["python", "main.py"]
+# Set the command to run the Flask application
+
+# Set the command to run the Flask application
+CMD ["python", "main_score.py"]
+
+
+
+#Build - docker build -t flaskapp .
+
+#Run - docker run -p 5000:5000 wog_flask
+
+####################################################################
+# using utils?
+####################################################################
+
+
+# Copy requirements first to leverage Docker cache
+# 
+
+# Install all dependencies
+# RUN pip install --no-cache-dir -r requirements.txt
