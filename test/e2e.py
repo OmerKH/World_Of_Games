@@ -1,7 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
 from webdriver_manager.chrome import ChromeDriverManager
 import sys
 
@@ -19,10 +16,7 @@ def test_scores_service(app_url):
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
-        # Initialize Chrome driver using WebDriver Manager
-        driver = webdriver.Chrome(service=Service(
-            ChromeDriverManager().install()), options=options)
-
+        # Initialize Chrome driver
         print("Attempting to initialize ChromeDriver...")
         driver = webdriver.Chrome(options=options)
         print("ChromeDriver initialized successfully.")
