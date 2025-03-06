@@ -2,6 +2,9 @@ version: '3.8'
 
 services:
   flask_app:
+    volumes:
+      - ./Scores.txt:/app/Scores.txt
+      
     container_name: wog_flask
     build:
       context: .
@@ -10,3 +13,5 @@ services:
       - "5000:5000"
 
     restart: unless-stopped
+
+

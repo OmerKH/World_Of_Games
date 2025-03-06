@@ -23,11 +23,6 @@
 
                 bat 'docker run --rm -v %cd%/Scores.txt:/app/Scores.txt flaskapp python e2e.py'
 
-
-
-
-
-
             }
         }
         stage('Finalize') {
