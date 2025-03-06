@@ -9,26 +9,29 @@
         }
         stage('Build') {
             steps {
-                bat 'docker build -t flaskapp .'
+                bat 'docker-compose build'
+
             }
         }
         stage('Run') {
             steps {
-                bat 'docker run -d -p 8777:5000 -v %cd%/Scores.txt:/app/Scores.txt --name wog_flask flaskapp'
+                bat 'docker-compose up -d'
+
             }
         }
         stage('Test') {
             steps {
                 // Remove the line to install selenium outside the Docker container
 
-                bat 'docker run --rm -v %cd%/Scores.txt:/app/Scores.txt flaskapp python e2e.py'
+                bat 'docker-compose run --rm e2e_tests'
+
 
             }
         }
         stage('Finalize') {
             steps {
-                bat 'docker stop wog_flask'
-                bat 'docker rm wog_flask'
+                bat 'docker-compose down'
+
                 // Push to DockerHub
                 bat 'docker tag flaskapp omerkh/flaskapp:latest'
                 bat 'docker push omerkh/flaskapp:latest'
