@@ -9,7 +9,8 @@
         }
         stage('Build') {
             steps {
-                bat 'docker-compose build'
+                bat 'docker build -t flaskapp .'
+
 
             }
         }
@@ -21,8 +22,6 @@
         }
         stage('Test') {
             steps {
-                // Remove the line to install selenium outside the Docker container
-
                 bat 'docker-compose run --rm e2e_tests'
 
 
