@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -5,27 +6,18 @@ from selenium.webdriver.chrome.options import Options
 import sys
 
 
-# Test the web service by checking if the score is a number between 1 and 1000
-# :param app_url: URL of the web service
-# :return: True if score is valid, False otherwise
-
-
-# def setup_webdriver_options():
-#     options = webdriver.ChromeOptions()
-#     chromedriver_autoinstaller.install()  # Install ChromeDriver if not found
-#     options.add_argument('--headless')  # Run in headless mode
-#     options.add_argument('--no-sandbox')
-#     options.add_argument('--disable-dev-shm-usage')
-#     return options
-
-
 def test_scores_service(app_url):
     # Set up the Chrome driver
     chromedriver_autoinstaller.install()
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
 
-    driver = webdriver.Chrome(options=chrome_options)
+    # Set Chrome options for headless mode
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+
+    driver = webdriver.Remote(
+        command_executor='http://selenium-hub:4444/wd/hub',
+        options=chrome_options
+    )
 
     # Open the application URL
     driver.get(app_url)
@@ -49,7 +41,8 @@ def main_function():
     Main function to run the test and return appropriate exit code
     :return: 0 if test passes, -1 if test fails
     """
-    app_url = "http://localhost:5000"
+    app_url = "http://flask_app:5000"
+
     if test_scores_service(app_url):
         print("Test passed!")
         return 0

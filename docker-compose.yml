@@ -1,17 +1,29 @@
-version: '3.8'
-
 services:
   flask_app:
     volumes:
-      - ./Scores.txt:/app/Scores.txt
-      
+      - ./Scores.txt:/app/Scores.txt  
+
     container_name: wog_flask
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .  
+      dockerfile: Dockerfile  
     ports:
-      - "5000:5000"
+      - "5000:5000"  
+    restart: unless-stopped  
 
-    restart: unless-stopped
+  chrome:
+    image: selenium/node-chrome:4.29.0-20250222
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
 
-
+  selenium-hub:
+    image: selenium/hub:4.29.0-20250222
+    ports:
+      - "4442:4442"  # Event bus
+      - "4443:4443"  # WebSocket
+      - "4444:4444"  # Selenium server
