@@ -9,29 +9,27 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'docker build -t flaskapp .'
+                sh 'docker build -t flaskapp .'
             }
         }
         stage('Run') {
             steps {
-                bat 'docker run -d --name flask_app -p 8777:8777 -v %cd%/Scores.txt:/app/Scores.txt flaskapp'
+                sh 'docker run -d --name flask_app -p 8777:8777 -v $(pwd)/Scores.txt:/app/Scores.txt flaskapp'
             }
         }
         stage('Test') {
             steps {
-                // Run the e2e tests
-                bat 'python test/e2e.py'
+                sh 'python3 test/e2e.py'
             }
         }
         stage('Finalize') {
             steps {
-                // Stop and remove the container
-                bat 'docker stop flask_app'
-                bat 'docker rm flask_app'
-
+                sh 'docker stop flask_app'
+                sh 'docker rm flask_app'
                 // Push to DockerHub
-                bat 'docker tag flaskapp omerkh/flaskapp:latest'
-                bat 'docker push omerkh/flaskapp:latest'
+                sh 'docker tag flaskapp omerkh/flaskapp:latest'
+                sh 'docker push omerkh/flaskapp:latest'
+
             }
         }
     }
