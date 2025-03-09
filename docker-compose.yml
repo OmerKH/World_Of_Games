@@ -5,7 +5,7 @@ services:
     volumes:
       - ./Scores.txt:/app/Scores.txt
       
-    container_name: wog_flask
+    container_name: flask_app
     build:
       context: .
       dockerfile: Dockerfile
