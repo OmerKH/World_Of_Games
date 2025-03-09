@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   flaskapp:
+    image: flaskapp  # Set the image name here
+
     volumes:
       - ./Scores.txt:/app/Scores.txt
       
@@ -14,5 +16,3 @@ services:
     environment:
       - FLASK_APP=main_score.py
     restart: unless-stopped
-
-
