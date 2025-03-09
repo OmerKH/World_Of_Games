@@ -34,6 +34,6 @@ If you would like to contribute to this project, please fork the repository and 
 This project is licensed under the MIT License.
 
 ## Contact Information
-For any questions or support, please reach out to [your-email@example.com].
+For any questions or support, please reach out to [omer.khs@gmail.com].
 
 Thank you for playing! Enjoy your journey in the World of Games!
