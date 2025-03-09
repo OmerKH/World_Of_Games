@@ -1,4 +1,4 @@
- pipeline {
+pipeline {
     agent any
 
     stages {
@@ -14,21 +14,21 @@
         }
         stage('Run') {
             steps {
-                bat 'docker run -d -p 8777:5000 -v %cd%/Scores.txt:/app/Scores.txt --name wog_flask flaskapp'
+                bat 'docker run -d --name flask_app -p 8777:8777 -v %cd%/Scores.txt:/app/Scores.txt flaskapp'
             }
         }
         stage('Test') {
             steps {
-                // Remove the line to install selenium outside the Docker container
-
-                bat 'docker run --rm -v %cd%/Scores.txt:/app/Scores.txt flaskapp python e2e.py'
-
+                // Run the e2e tests
+                bat 'python e2e.py'
             }
         }
         stage('Finalize') {
             steps {
-                bat 'docker stop wog_flask'
-                bat 'docker rm wog_flask'
+                // Stop and remove the container
+                bat 'docker stop flask_app'
+                bat 'docker rm flask_app'
+
                 // Push to DockerHub
                 bat 'docker tag flaskapp omerkh/flaskapp:latest'
                 bat 'docker push omerkh/flaskapp:latest'

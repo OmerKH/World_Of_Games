@@ -4,13 +4,15 @@ services:
   flask_app:
     volumes:
       - ./Scores.txt:/app/Scores.txt
-
+      
     container_name: wog_flask
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8777:8777"
-
-
+    environment:
+      - FLASK_APP=main_score.py
     restart: unless-stopped
+
+
