@@ -9,12 +9,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t flaskapp .'
+                sh 'docker-compose build'
+                // sh 'docker build -t flaskapp .'
             }
         }
         stage('Run') {
             steps {
-                sh 'docker run -d --name flask_app -p 8777:8777 -v $(pwd)/Scores.txt:/app/Scores.txt flaskapp'
+                sh 'docker-compose up -d'
+                // sh 'docker run -d --name flask_app -p 8777:8777 -v $(pwd)/Scores.txt:/app/Scores.txt flaskapp'
             }
         }
         stage('Test') {
