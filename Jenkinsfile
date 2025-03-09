@@ -9,7 +9,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'docker build -t flaskapp .'
+                // bat 'docker build -t flaskapp .'
+                bat 'docker-compose build'
             }
         }
         stage('Run') {
