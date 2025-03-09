@@ -15,13 +15,13 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
                 // sh 'docker run -d --name flask_app -p 8777:8777 -v $(pwd)/Scores.txt:/app/Scores.txt flaskapp'
             }
         }
         stage('Test') {
             steps {
-                sh 'python3 test/e2e.py'
+                bat 'python3 test/e2e.py'
             }
         }
         stage('Finalize') {
