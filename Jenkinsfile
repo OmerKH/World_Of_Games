@@ -9,8 +9,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'docker-compose build'
-                // sh 'docker build -t flaskapp .'
+                bat 'docker build -t flaskapp .'
             }
         }
         stage('Run') {
@@ -29,8 +28,8 @@ pipeline {
                 bat 'docker stop flask_app'
                 bat 'docker rm flask_app'
                 // Push to DockerHub
-                bat 'docker tag flaskapp omerkh/wog-flaskapp:latest'
-                bat 'docker push omerkh/wog-flaskapp:latest'
+                bat 'docker tag flaskapp omerkh/flaskapp:latest'
+                bat 'docker push omerkh/flaskapp:latest'
 
             }
         }
