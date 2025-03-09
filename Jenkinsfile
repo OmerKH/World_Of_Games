@@ -20,7 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Run the e2e tests
-                bat 'python e2e.py'
+                bat 'python test/e2e.py'
             }
         }
         stage('Finalize') {
