@@ -1,29 +1,35 @@
-FROM python:3.9-alpine3.21
+FROM selenium/standalone-chrome:latest
 
-# Working directory
+# Install Python and pip
+USER root
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
+
 WORKDIR /app
 
+# Create and activate virtual environment
+RUN python3 -m venv /app/venv
+ENV PATH="/app/venv/bin:$PATH"
 
-# Copy application files
 COPY main_score.py .
 COPY utils.py .
 COPY Scores.txt .
 COPY requirements.txt .
 COPY test/e2e.py .
 
-# Ensure selenium is included in requirements.txt
-RUN apk add --no-cache \
-    chromium \
-    && apk add --no-cache \
-    chromium-chromedriver \
-    && rm -rf /var/cache/apk/*
+# Install Python dependencies in virtual environment
+RUN pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
 
+# Set environment variables for Flask
+ENV FLASK_APP=app.py
 
+EXPOSE 8777
 
+# Set correct permissions for application files
+RUN chown -R seluser:seluser /app
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Switch back to non-root user for security
+USER seluser
 
-# Expose the port the app runs on
-
-# Set the command to run the Flask application and then the e2e tests
-CMD ["sh", "-c", "python3 main_score.py & sleep 10 && python3 e2e.py"]
+# Command to run both the application and tests
+CMD python3 main_score.py & sleep 5 && python3 e2e.py || exit 1 && wait 
