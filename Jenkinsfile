@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // bat 'docker build -t flaskapp .'
-                sh 'docker-compose build'
+                sh 'docker-compose build --no-cache'
             }
         }
         stage('Run') {
