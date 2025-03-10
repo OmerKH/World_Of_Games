@@ -26,7 +26,8 @@ pipeline {
         }
         stage('Finalize') {
             steps {
-                sh 'docker-compose down'
+                sh 'docker stop flask_app'
+                sh 'docker rm flask_app'
                 // Push to DockerHub
                 sh 'docker tag flaskapp omerkh/flaskapp:latest'
                 sh 'docker push omerkh/flaskapp:latest'
