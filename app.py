@@ -2,7 +2,8 @@
 from games.guess_game import play as start_guess_game
 from games.memory_game import play as start_memory_game
 from games.currency_roulette_game import play as start_currency_roulette_game
-from utils.utils import add_score
+from utils.score import add_score
+
 
 
 def welcome():

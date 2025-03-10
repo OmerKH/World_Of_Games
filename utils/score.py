@@ -1,7 +1,8 @@
 # add_score(difficulty): reads the score from file Score_File
 # than --> POINTS_OF_WINNING = (DIFFICULTY X 3) + 5 Each
 
-from utils import SCORES_FILE_NAME
+from utils.utils import SCORES_FILE_NAME
+
 
 
 def add_score(difficulty):
