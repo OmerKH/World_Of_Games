@@ -25,9 +25,6 @@ def test_scores_service(app_url):
             # Check if the score is between 1 and 1000
             return 1 <= score <= 1000
         return False
-    except Exception as e:
-        print(f"Test error: {e}")
-        return False
     finally:
         driver.quit()
 
