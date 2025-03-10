@@ -1,7 +1,7 @@
 import time
 from random import randrange
 import os
-from utils.utils import validate_input, compare_values
+from utils import validate_input, compare_values
 
 
 # the function needs to generate sequence of random numbers depending on the difficulty level (generate_sequence)

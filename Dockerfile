@@ -10,10 +10,10 @@ WORKDIR /app
 RUN python3 -m venv /app/venv
 ENV PATH="/app/venv/bin:$PATH"
 
-COPY utils/main_score.py .
-COPY utils/utils.py .
-COPY utils/Scores.txt .
-COPY utils/requirements.txt .
+COPY main_score.py .
+COPY utils.py .
+COPY Scores.txt .
+COPY requirements.txt .
 COPY test/e2e.py .
 
 # Install Python dependencies in virtual environment

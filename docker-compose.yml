@@ -3,7 +3,7 @@ services:
   flaskapp:
     image: flaskapp  
     volumes:
-      - ./utils/Scores.txt:/app/Scores.txt
+      - ./Scores.txt:/app/Scores.txt
 
       
     container_name: flask_app
