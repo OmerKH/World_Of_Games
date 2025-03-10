@@ -1,6 +1,6 @@
 import requests
 from random import randrange
-from utils import validate_input, compare_values
+from utils.utils import validate_input, compare_values
 
 
 # the function needs to give a random number (generate_number)

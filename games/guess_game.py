@@ -1,5 +1,5 @@
 from random import randrange
-from utils import validate_input, compare_values
+from utils.utils import validate_input, compare_values
 
 
 # generate_number():
