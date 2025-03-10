@@ -2,8 +2,7 @@ version: '3.8'
 
 services:
   flaskapp:
-    image: flaskapp  # Set the image name here
-
+    image: flaskapp  
     volumes:
       - ./Scores.txt:/app/Scores.txt
       
