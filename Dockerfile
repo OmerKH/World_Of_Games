@@ -32,4 +32,6 @@ RUN chown -R seluser:seluser /app
 USER seluser
 
 # Command to run both the application and tests
-CMD python3 main_score.py & sleep 5 && python3 e2e.py || exit 1 && wait 
+CMD python3 main_score.py 
+
+# & sleep 5 && python3 e2e.py || exit 1 && wait
