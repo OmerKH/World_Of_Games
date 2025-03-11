@@ -21,7 +21,7 @@ RUN pip3 install --upgrade pip && \
     pip3 install --no-cache-dir -r requirements.txt
 
 # Set environment variables for Flask
-ENV FLASK_APP=app.py
+ENV FLASK_APP=main_score.py
 
 EXPOSE 8777
 
