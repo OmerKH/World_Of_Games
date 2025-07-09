@@ -12,7 +12,7 @@ ENV PATH="/app/venv/bin:$PATH"
 
 COPY main_score.py .
 COPY utils.py .
-COPY Scores.txt .
+# COPY Scores.txt .
 COPY requirements.txt .
 COPY test/e2e.py .
 
