@@ -10,26 +10,26 @@ pipeline {
         stage('Build') {
             steps {
                 // bat 'docker build -t flaskapp .'
-                sh 'docker-compose build --no-cache'
+                bat 'docker-compose build --no-cache'
             }
         }
         stage('Run') {
             steps {
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
                 // sh 'docker run -d --name flask_app -p 8777:8777 -v $(pwd)/Scores.txt:/app/Scores.txt flaskapp'
             }
         }
         stage('Test') {
             steps {
-                sh 'python test/e2e.py'
+                bat 'python test/e2e.py'
             }
         }
         stage('Finalize') {
             steps {
-                sh 'docker-compose down'
+                bat 'docker-compose down'
                 // Push to DockerHub
-                sh 'docker tag flaskapp omerkh/flaskapp:latest'
-                sh 'docker push omerkh/flaskapp:latest'
+                bat 'docker tag flaskapp omerkh/flaskapp:latest'
+                bat 'docker push omerkh/flaskapp:latest'
 
             }
         }
