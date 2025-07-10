@@ -13,7 +13,7 @@ COPY --from=builder /usr/local/lib/python3.13/site-packages /usr/local/lib/pytho
 # Copy app files
 COPY main_score.py .
 COPY utils.py .
-# COPY Scores.txt .
+COPY Scores.txt .
 COPY test/e2e.py .
 
 # Install Python dependencies 
