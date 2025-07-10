@@ -21,7 +21,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python3 test/e2e.py'
+                sh 'docker exec flask_app python3 test/e2e.py'
+                // sh 'python3 test/e2e.py'
             }
         }
         stage('Finalize') {
