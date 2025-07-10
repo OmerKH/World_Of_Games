@@ -11,11 +11,7 @@ FROM python:3.13-alpine
 WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
 # Copy app files
-COPY main_score.py .
-COPY utils.py .
-COPY Scores.txt .
-COPY test/e2e.py .
-
+COPY main_score.py utils.py Scores.txt test/e2e.py ./
 # Set environment variables for Flask
 ENV FLASK_APP=app.py
 
