@@ -16,10 +16,6 @@ COPY utils.py .
 COPY Scores.txt .
 COPY test/e2e.py .
 
-# Install Python dependencies 
-# RUN pip3 install --upgrade pip && \
-#     pip3 install --no-cache-dir -r requirements.txt
-
 # Set environment variables for Flask
 ENV FLASK_APP=app.py
 
@@ -27,4 +23,3 @@ EXPOSE 8777
 
 CMD ["python3", "main_score.py"] 
 
-# & sleep 5 && python3 e2e.py || exit 1 && wait
