@@ -1,5 +1,5 @@
 selenium>=4.0.0
 Flask~=2.3.0
-chromedriver_autoinstaller
+chromedriver_autoinstaller~=0.6.4
 selenium~=4.28.1
 webdriver-manager~=4.0.2
