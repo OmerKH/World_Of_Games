@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/OmerKH/World_of_Games.git'
+                git 'https://github.com/OmerKH/wog_v2'
             }
         }
         stage('Build') {
