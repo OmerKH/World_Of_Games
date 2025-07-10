@@ -21,8 +21,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker exec flask_app python3 e2e.py'
-                // sh 'python3 test/e2e.py'
+                sh 'pip install -r requirements.txt'
+                sh 'python3 test/e2e.py'
             }
         }
         stage('Finalize') {
