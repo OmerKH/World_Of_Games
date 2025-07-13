@@ -1,7 +1,7 @@
 appName: world-of-games
-appImage: flaskapp
+appImage: omerkh/flaskapp
 appVersion: "latest"
-containerPort: 80
+containerPort: 8777
 containerEnvVars:
   - name: FLASK_ENV
     value: production
@@ -10,4 +10,4 @@ containerEnvVars:
 appReplicas: 2
 
 servicePort: 8777
-serviceType: ClusterIP
+serviceType: NodePort
