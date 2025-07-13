@@ -1,0 +1,13 @@
+appName: world-of-games
+appImage: flaskapp
+appVersion: "latest"
+containerPort: 80
+containerEnvVars:
+  - name: FLASK_ENV
+    value: production
+  - name: FLASK_APP
+    value: app.py
+appReplicas: 2
+
+servicePort: 8777
+serviceType: ClusterIP

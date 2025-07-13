@@ -1,0 +1,15 @@
+apiVersion: v2
+name: world-of-games
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+keywords:
+  - flask
+  - games
+  - python
+home: https://github.com/OmerKH/wog_v2
+sources:
+  - https://github.com/OmerKH/wog_v2
+maintainers:
+  - name: Omer-KH
