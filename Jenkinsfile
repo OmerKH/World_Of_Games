@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'timeout /t 30'
+                sh 'sleep 30'
                 sh "kubectl port-forward svc/world-of-games 8777:8777 &"
                 sh 'pip install -r requirements.txt'
                 sh 'python test/e2e.py'
