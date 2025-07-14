@@ -9,26 +9,26 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t omerkh/flaskapp:latest .'
+                bat 'docker build -t omerkh/flaskapp:latest .'
             }
         }
         stage('Run') {
             steps {
-                sh 'helm lint world-of-games'
-                sh 'helm upgrade --install wog-release world-of-games -f world-of-games/values.yaml'
+                bat 'helm lint world-of-games'
+                bat 'helm upgrade --install wog-release world-of-games -f world-of-games/values.yaml'
             }
         }
         stage('Test') {
             steps {
-                sh 'pip3 install -r requirements.txt'
-                sh 'python3 test/e2e.py'
+                bat 'pip3 install -r requirements.txt'
+                bat 'python3 test/e2e.py'
             }
         }
         stage('Finalize') {
             steps {
-                sh 'helm uninstall wog-release || true'
+                bat 'helm uninstall wog-release || true'
                 // Push to DockerHub
-                sh 'docker push omerkh/flaskapp:latest'
+                bat 'docker push omerkh/flaskapp:latest'
             }
         }
     }
