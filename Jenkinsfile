@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'docker build -t omerkh/flaskapp:latest .'
+                sh 'docker build -t omerkh/flaskapp:latest .'
             }
         }
         stage('Run') {
