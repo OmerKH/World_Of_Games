@@ -10,4 +10,4 @@ containerEnvVars:
 appReplicas: 2
 
 servicePort: 8777
-serviceType: NodePort
+serviceType: ClusterIP
