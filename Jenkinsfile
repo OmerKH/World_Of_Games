@@ -22,8 +22,8 @@ pipeline {
             steps {
                 sh 'sleep 30'
                 sh "kubectl port-forward svc/world-of-games 8777:8777 &"
-                sh 'pip install -r requirements.txt'
-                sh 'python test/e2e.py'
+                sh 'pip3 install -r requirements.txt'
+                sh 'python3 test/e2e.py'
             }
         }
         stage('Finalize') {
