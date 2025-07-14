@@ -9,14 +9,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // bat 'docker build -t flaskapp .'
-                sh 'docker-compose build --no-cache'
+                sh 'docker build -t omerkh/flaskapp:latest .'
             }
         }
         stage('Run') {
             steps {
-                sh 'docker-compose up -d'
-                // sh 'docker run -d --name flask_app -p 8777:8777 -v $(pwd)/Scores.txt:/app/Scores.txt flaskapp'
+                sh 'helm lint world-of-games'
+                sh 'helm upgrade --install wog-release world-of-games -f world-of-games/values.yaml'
             }
         }
         stage('Test') {
@@ -27,11 +26,9 @@ pipeline {
         }
         stage('Finalize') {
             steps {
-                sh 'docker-compose down'
+                sh 'helm uninstall wog-release || true'
                 // Push to DockerHub
-                sh 'docker tag flaskapp omerkh/flaskapp:latest'
                 sh 'docker push omerkh/flaskapp:latest'
-
             }
         }
     }
