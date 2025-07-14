@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/OmerKH/wog_v2'
+                git 'https://github.com/OmerKH/World_Of_Games'
             }
         }
         stage('Build') {
@@ -20,8 +20,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'pip3 install -r requirements.txt'
-                bat 'python3 test/e2e.py'
+                bat 'pip install -r requirements.txt'
+                bat 'python test/e2e.py'
             }
         }
         stage('Finalize') {
