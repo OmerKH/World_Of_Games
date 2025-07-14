@@ -14,23 +14,23 @@ pipeline {
         }
         stage('Run') {
             steps {
-                bat 'helm lint world-of-games'
-                bat 'helm upgrade --install wog-release world-of-games -f world-of-games/values.yaml'
+                sh 'helm lint world-of-games'
+                sh 'helm upgrade --install wog-release world-of-games -f world-of-games/values.yaml'
             }
         }
         stage('Test') {
             steps {
-                bat 'powershell -Command "Start-Sleep -Seconds 60"'
-                bat "kubectl port-forward svc/world-of-games 8777:8777"
-                bat 'pip install -r requirements.txt'
-                bat 'python test/e2e.py'
+                sh 'timeout /t 60'
+                sh "kubectl port-forward svc/world-of-games 8777:8777 &"
+                sh 'pip install -r requirements.txt'
+                sh 'python test/e2e.py'
             }
         }
         stage('Finalize') {
             steps {
-                bat 'helm uninstall wog-release || true'
+                sh 'helm uninstall wog-release || true'
                 // Push to DockerHub
-                bat 'docker push omerkh/flaskapp:latest'
+                sh 'docker push omerkh/flaskapp:latest'
             }
         }
     }
