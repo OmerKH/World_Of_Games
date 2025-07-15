@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'helm lint world-of-games'
+                sh 'helm lint Helm'
                 sh 'helm upgrade --install wog-release world-of-games -f Helm/values.yaml'
             }
         }
